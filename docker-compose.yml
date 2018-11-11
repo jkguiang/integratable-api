@@ -1,0 +1,20 @@
+version: '3.5'
+
+services:
+
+  integratable:
+    container_name: integratable
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - './:/usr/src/server'
+      - '/usr/src/server/node_modules'
+      - './client:/usr/src/server/client'
+      - '/usr/src/server/client/node_modules'
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+    security_opt:
+      - seccomp:unconfined
