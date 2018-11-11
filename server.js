@@ -11,9 +11,9 @@ app.get('/api/hello', (req, res) => {
 });
 app.post('/api/world', (req, res) => {
   console.log(req.body);
-  exec('maxima -r "float(integrate(x^2,x,1,2));"', function callback(error, stdout, stderr){
+  exec(`maxima -very-quiet -r 'float(integrate(${req.body.integrate},x,${req.body.from},${req.body.to}));'`, function callback(error, stdout, stderr){
     res.send(
-      `I received your POST request. This is what you sent me: ${stdout}`,
+      `${stdout}`,
     );
   });
 });
